@@ -1,0 +1,11 @@
+{% extends 'accounts/base.html' %}
+{% block body %}
+{% for work_sample in work_samples %}
+<img src='{{work_sample.image.url}}' alt ='Work Sample' width='100%'>
+
+{% empty %}
+<h1>No work Sample!</h1>
+
+{% endfor %}
+
+{% endblock %}

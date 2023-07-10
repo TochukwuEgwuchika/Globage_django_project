@@ -1,0 +1,112 @@
+{% extends 'accounts/base.html' %}
+{% load crispy_forms_tags %}
+{% load humanize %}
+
+{% block title %} Buildings {% endblock %}
+
+{% block body %}
+<!--div-->
+<div class="collapse show" id="collapseExample">
+  <div class="card card-body mt-3 mb-3">
+          
+        <form method = "GET" action = '{% url 'view_building' %}'>
+            <div class="input-group mb-3 mt-3" style="width: 100%">
+  <div class="input-group-prepend">
+    <button class="btn btn-outline-primary" type="button">Category</button>
+  </div>
+  <select class="custom-select" id="inputGroupSelect03" name="category">
+    
+    {% for category in categories  %}
+    <option value="{{category.id}}">{{category.type}}</option>
+    {% endfor %}
+  </select>
+</div>
+            <div class="input-group mb-3 mt-3">
+  <input type="text" class="form-control" placeholder="Search Location" aria-describedby="basic-addon2" name ='location' required>
+  <div class="input-group-append">
+    <button class="btn btn-outline-secondary" type="submit">SEARCH</button>
+  </div>
+</div>
+        </form>
+  </div>
+</div>
+<!--div-->
+<h1 class="text-center">Buildings</h1>
+
+{% for building in buildings_list %}
+<section style="background-color: #eee;">
+    <div class="container py-5">
+      <div class="row justify-content-center mb-3">
+        <div class="col-md-12 col-xl-10">
+          <div class="card shadow-0 border rounded-3">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-12 col-lg-3 col-xl-3 mb-4 mb-lg-0">
+                  <div class="bg-image hover-zoom ripple rounded ripple-surface">
+                    <img src="{{building.picture.url}}"
+                      class="w-100" />
+                    <a href="#!">
+                      <div class="hover-overlay">
+                        <div class="mask" style="background-color: rgba(253, 253, 253, 0.15);"></div>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xl-6">
+                  <h5>{{building.category}} at {{building.lga}}</h5>
+                  
+                  <div class="mt-1 mb-0 text-muted small"><i class="fa fa-map-marker"></i>
+                    <span>{{building.location}}</span>
+                    <span class="text-primary"> • </span>
+                    <span>{{building.lga}}</span>
+                    <span class="text-primary"> • </span>
+                    <span>{{building.state}} State<br /></span>
+                    
+                  </div>
+                  <p class="text-truncate mb-4 mb-md-0">
+                 <span class="h5"> Description: </span> {{building.description}}
+                  </p>
+                  <h6 class="text-success">Posted on {{building.date_posted}}</h6>
+                </div>
+                <div class="col-md-6 col-lg-3 col-xl-3 border-sm-start-none border-start">
+                  <div class="d-flex flex-column align-items-center mb-1">
+                    <h4 class="mb-1 me-1">&#8358;{{building.price|intcomma}}</h4>
+                    <span class="text-danger"><small>NEGOTIABLE</small></span>
+                  </div>
+                  
+                  <div class="d-flex flex-column mt-4">
+                    <a class="btn btn-primary btn-sm" href="{% url 'secure-building' building.id %}" type="button">SECURE BUILDING</a>
+
+                    {% if request.user == building.author %}
+                    <button class="btn btn-outline-primary btn-sm mt-2" type="button">
+                      Delete Post
+                    </button>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  {% empty %}
+  <h1>No building in this category. Try another category.</h1>
+  {% endfor %}
+
+{% if buildings_list.has_previous %}
+<a href="?page=1">&laquo First</a>
+<a href="?page={{buildings_list.previous_page_number}}">Previous</a>
+
+{% endif %}
+
+Page {{buildings_list.number}} of {{buildings_list.paginator.num_pages}}
+
+{% if buildings_list.has_next %}
+<a href="?page={{buildings_list.next_page_number}}">Next</a>
+<a href="?page={{buildings_list.paginator.num_pages}}">Last &raquo</a>
+
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,108 @@
+{% extends 'accounts/base.html' %}
+{% load static %}
+
+{% block css %} 
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
+{% endblock %}
+
+{% block title %}Hire Services {% endblock %}
+{% load crispy_forms_tags %}
+{% block body %}
+
+<!--div-->
+
+  <div class="collapse show" id="collapseExample">
+    <div class="card card-body mt-3 mb-3">
+        <form method="GET" action="{% url 'hire_services' %}">
+            <div class="input-group mb-3 mt-3" style="width: 100%">
+  <div class="input-group-prepend">
+    <button class="btn btn-outline-primary" type="button">Service Provided</button>
+  </div>
+  <select class="custom-select" id="inputGroupSelect03" name="service">
+    
+    {% for service in services  %}
+    <option value="{{service.id}}">{{service.name_of_service}}</option>
+    {% endfor %}
+  </select>
+</div>
+            
+         <div class="input-group mb-3">
+  <input name="location" type="text" class="form-control" placeholder="Search Location (Optional)" aria-label="Recipient's username" aria-describedby="basic-addon2">
+  <div class="input-group-append">
+    <button class="btn btn-outline-secondary" type="submit">SEARCH</button>
+  </div>
+</div>
+            </form>
+    </div>
+  </div>
+  
+  <!--div-->
+
+
+
+
+<section id="team" class="pb-5">
+    <div class="container">
+        <h6 class="section-title h1 mt-3" style="text-align: center;">Hire Services</h6><hr style="color:blue">
+        <div class="row">
+ 
+
+{% for service_personnel in services_list %}
+
+{% if service_personnel.service_personnel.userverification.is_payment_up_to_date %}
+
+             <!-- Team member -->
+             <div class="col-xs-12 col-sm-6 col-md-4 mt-3">
+                <div class="image-flip" >
+                    <div class="mainflip flip-0">
+                        <div class="frontside">
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <p><img class="rounded-circle" src="{{service_personnel.service_personnel.profile.profile_picture.url}}" alt="card image" width="80" style="border:1px solid blue"></p>
+                                    <h5 class="card-title">{{service_personnel.service_personnel.first_name}} {{service_personnel.service_personnel.last_name}}</h5><hr>
+                                    <p class="card-text"><small>Skill: {{service_personnel.service_provided}} </small><br><small>{{service_personnel.location}}</small><br><small style="word-wrap: normal;">Range of Coverage: {{service_personnel.range_of_coverage}}</small><!--Cover Letter:--> </p>
+                                    <!--<p class="card-text">This is basic card with image on top, title, description and button.</p>-->
+                                    <a href="{% url 'view_work_samples' service_personnel.id %}" class="btn btn-primary btn-sm">VIEW WORK SAMPLE</i></a>
+                                    <a href="tel:{{service_personnel.service_personnel.profile.phone_number}}" class="btn btn-primary btn-sm"><i class="fa fa-phone"></i></a>
+                                    <a href="{% url 'hire' service_personnel.id %}" class="btn btn-primary btn-sm"><i class="fab fa-whatsapp" aria-hidden="true" style="font-size: 15px;"></i></a>
+                                    
+                                </div>
+                            </div>                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+                        
+            <!-- ./Team member -->
+           
+{% endif %}
+{% empty %}
+<h1>No Results Found. Try another category</h1>
+
+{% endfor %}
+
+        </div>
+    </div>
+</section>
+<!-- Team -->
+
+{% if services_list.has_previous %}
+<a href="?page=1">&laquo First</a>
+<a href="?page={{services_list.previous_page_number}}">Previous</a>
+{% endif %}
+
+Page {{services_list.number}} of {{services_list.paginator.num_pages}}
+
+{% if services_list.has_next %}
+<a href="?page={{services_list.next_page_number}}">Next</a>
+<a href="?ppage={{services_list.paginator.num_pages}}">Last &raquo</a>
+{% endif %}
+
+
+{% block script %}
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+{% endblock %}
+
+{% endblock %}

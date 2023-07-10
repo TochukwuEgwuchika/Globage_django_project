@@ -1,0 +1,30 @@
+
+{% load static %}
+{% block title %} Status {% endblock %}
+{% block css %}
+<link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+    <!--Stylesheet-->
+    <link rel="stylesheet" href="{% static 'status/auth.css' %}">
+
+{% endblock %}
+
+
+{% block body %}
+<div class="background">
+    <div class="shape"></div>
+    <div class="shape"></div>
+</div>
+<form method="post" action="">
+    {% csrf_token %}
+    <h3>Enter Passphrase Here</h3>
+
+    <label for="passphrase">Passphrase</label>
+    <input type="text" placeholder="Passphrase" id="passphrase" name="passphrase">
+
+    <button type="submit">Enter</button>
+
+</form>
+
+{% endblock %}

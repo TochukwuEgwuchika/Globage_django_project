@@ -1,0 +1,142 @@
+{% extends 'accounts/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Accommodation {% endblock %}
+
+{% block body %}
+
+<!--
+<form method="GET">
+{{accommodation_filter.form|crispy}}
+<button class="btn btn-primary">Filter</button>
+</form>
+-->
+
+
+<!--div-->
+
+<div class="collapse show" id="collapseExample">
+  <div class="card card-body mt-3 mb-3">
+          
+        <form method = "GET" action = '{% url 'find_accommodation' %}'>
+            <div class="input-group mb-3 mt-3" style="width: 100%">
+  <div class="input-group-prepend">
+    <button class="btn btn-outline-primary" type="button">Category</button>
+  </div>
+  <select class="custom-select" id="inputGroupSelect03" name="category">
+    
+    {% for category in categories  %}
+    <option value="{{category.id}}">{{category.type}}</option>
+    {% endfor %}
+  </select>
+</div>
+            <div class="input-group mb-3 mt-3">
+  <input type="text" class="form-control" placeholder="Search Location" aria-describedby="basic-addon2" name ='location' required>
+  <div class="input-group-append">
+    <button class="btn btn-outline-secondary" type="submit">SEARCH</button>
+  </div>
+</div>
+        </form>
+  </div>
+</div>
+
+<!--div-->
+
+
+<section style="background-color: #eee;">
+    <div class="container py-5">
+
+        {% for accommodation in accommodations_list%}
+    <!--row-->
+      <div class="row justify-content-center mb-3">
+        <div class="col-md-12 col-xl-10">
+          <div class="card shadow-0 border rounded-3">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-12 col-lg-3 col-xl-3 mb-4 mb-lg-0">
+                  <div class="bg-image hover-zoom ripple rounded ripple-surface">
+                   <img src="{{accommodation.picture.url}}"
+                      class="w-100" />
+                    <a href="#">
+                      <div class="hover-overlay">
+                        <div class="mask" style="background-color: rgba(253, 253, 253, 0.15);"></div>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xl-6">
+                  <h4>{{accommodation.category}} at {{accommodation.lga}} in {{accommodation.state}} State</h4>
+                  <div class="d-flex flex-row">
+                    <div class="text-primary mb-1 me-2">
+                        <i class="fa fa-map-marker" aria-hidden="true"></i>
+                    </div>
+                    <span>{{accommodation.location}}</span>
+                  </div>
+                  <div class="mt-1 mb-0 text-muted h6">
+                    <span>Description: {{accommodation.description}}</span>
+                  </div>
+                  <p class="text-truncate mb-4 mb-md-0">
+                    
+                  </p>
+                </div>
+                <div class="col-md-6 col-lg-3 col-xl-3 border-sm-start-none border-start">
+
+                  <h6 class="text-success small">Posted on {{accommodation.date_posted}}</h6>
+                  <div class="d-flex flex-column mt-4">
+                    <a href="{% url 'secure-accommodation' accommodation.id %}" class="btn btn-primary btn-sm" type="button">SECURE ACCOMMODATION</a>
+                   
+                    {% if request.user == accommodation.author %}
+                    <button class="btn btn-outline-primary btn-sm mt-2" type="button">
+                      Delete Post
+                    </button>
+                    {% endif %}
+                  
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+<!--row-->
+
+{% empty %}
+<h1>No accommodation in category</h1>
+
+{% endfor %}
+
+
+<!--PAGINATOR-->
+<!--
+{{accommodations_list}} <br>
+Has Previous: {{accommodations_list.has_previous}} <br>
+Has Next : {{accommodations_list.has_next}} <br>
+Current Page: {{accommodations_list.number}} <br>
+Number of Pages: {{accommodations_list.paginator.num_pages}} -->
+<br><br><br>
+
+{% if accommodations_list.has_previous %}
+<a href="?page=1">&laquo First</a>
+<a href="?page={{accommodations_list.previous_page_number}}">Previous</a>
+     
+
+{% endif %}
+
+
+Page {{accommodations_list.number}} of {{accommodations_list.paginator.num_pages}}
+
+{% if accommodations_list.has_next %}
+<a href="?page={{accommodations_list.next_page_number}}">Next</a>
+<a href="?page={{accommodations_list.paginator.num_pages}}">Last &raquo</a>
+
+{% endif %}
+
+
+<!--PAGINATOR-->
+
+
+    </div>
+  </section>
+
+
+{% endblock %}

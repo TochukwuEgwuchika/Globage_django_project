@@ -1,0 +1,44 @@
+*{
+    margin: 0px;
+    color: black;
+    font-family: 'Poppins', sans-serif;
+}
+
+#filter {  
+    border-radius: 10px;
+    box-shadow: 0px 2px 20px gray;
+    max-width: 300px;
+    height: 150px;
+    margin: auto;
+    padding: 30px;
+    padding-top: 10px;
+    margin-top: 100px;    
+}
+
+#select_state {
+    font-size: 30px;
+    margin-top: 15px;
+    color: purple;
+    text-align: center;
+}
+
+#state {
+    width: 300px;
+    height: 30px;
+    margin-top: 15px;
+    text-align: center;
+    margin: 10px auto;
+    color: purple;
+}
+
+#state:active{
+    box-shadow: 0px 2px 10px coral;
+}
+
+
+#submit {
+    text-align: center;
+    height: 30px;
+    width: 100px;
+    margin: 0px auto;
+}

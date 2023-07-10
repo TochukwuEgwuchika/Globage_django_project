@@ -1,0 +1,143 @@
+{% extends 'accounts/base.html' %}
+{% load static %}
+
+{% block title %} Globage {% endblock %}
+
+{% block body %}
+
+<!-- Carousel wrapper -->
+<div id="carouselBasicExample" class="carousel slide carousel-fade" data-mdb-ride="carousel" style = "position: relative; width: 100%; top: 0">
+    <!-- Indicators -->
+    <div class="carousel-indicators">
+      <button
+        type="button"
+        data-mdb-target="#carouselBasicExample"
+        data-mdb-slide-to="0"
+        class="active"
+        aria-current="true"
+        aria-label="Slide 1"
+      ></button>
+      <button
+        type="button"
+        data-mdb-target="#carouselBasicExample"
+        data-mdb-slide-to="1"
+        aria-label="Slide 2"
+      ></button>
+      <button
+        type="button"
+        data-mdb-target="#carouselBasicExample"
+        data-mdb-slide-to="2"
+        aria-label="Slide 3"
+      ></button>
+    </div>
+  
+    <!-- Inner -->
+    <div class="carousel-inner">
+      <!-- Single item -->
+      <div class="carousel-item active">
+        <img src="{% static 'accounts/globagebg3.jpg' %}" class="d-block w-100" style="width: 100vw" alt="Globage"/>
+        <!--<div class="carousel-caption d-md-block">
+          <h1 style="font-size: 500%; color: rgb(253, 166, 79);">Globage</h1>
+          <p>Helping you get your needs with ease.</p>
+        </div>-->
+      </div>
+  
+      <!-- Single item -->
+      <!--<div class="carousel-item">
+        <img src="{% static 'accounts/bg-home2.jpg' %}" style="filter:brightness(20%)" class="d-block w-100" alt="Globage"/>
+        <div class="carousel-caption d-md-block">
+          <h3 style="font-size: 90%; color: rgb(253, 166, 79);">1<br>Real Estate</h3>
+          <p>Helping you sell or secure lands, buildings, shops, shopping malls, etc </p>
+        </div>
+      </div>
+  
+      <!-- Single item -->
+      <div class="carousel-item">
+        <img src="{% static 'accounts/globagebg5.jpg' %}" style="filter:brightness(100%)" class="d-block w-100" alt="Globage"/>
+        <div class="carousel-caption d-md-block">
+          <!--<h3 style="font-size: 80%; color: rgb(253, 166, 79);"><br>Skill/Professional Service Personnel</h3>-->
+          
+        </div>
+      </div>
+    </div>
+    <!-- Inner -->
+  
+    <!-- Controls -->
+    <button class="carousel-control-prev" type="button" data-mdb-target="#carouselBasicExample" data-mdb-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-mdb-target="#carouselBasicExample" data-mdb-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+  <!-- Carousel wrapper -->
+
+
+
+
+
+
+<!--services-->
+<div class='container-fluid mx-auto mt-5 mb-5 col-12' style="text-align: center">
+    <h3 class="hd">CATEGORIES</h3>
+    <p><small class="text-muted">We always render more and better service than <br /> expected.</small></p>
+    <div class="row" style="justify-content: center">
+        <div class="card col-md-3 col-12" style="border-top: 2px solid blue;">
+            <div class="card-content">
+                <div class="card-body"> 
+                    <div class="shadow"></div>
+                    <h3 class="card-title" style="word-wrap: normal;">Accommodation </h3>
+                    <div class="card-subtitle">
+                        <p> With Globage, finding an accommodation is just but a click away. </p>
+                    </div>
+                    <div class = "card-subtitle"><a href="{% url 'find_accommodation' %}" class="btn btn-primary"><i class = "fa fa-sign-in"></i></a></div>
+                </div>
+            </div>
+        </div>
+        <div class="card col-md-3 col-12 ml-2" style="border-top: 2px solid blue;">
+            <div class="card-content">
+                <div class="card-body">
+                    <h3 class="card-title"> Land </h3>
+                    <div class="card-subtitle">
+                        <p>Secure a land anywhere in Nigeria. All lands on our platform are properly verified.</p>
+                    </div>
+                    <div class = "card-subtitle"><a href="{% url 'view_land' %}" class="btn btn-primary"><i class = "fa fa-sign-in"></i></a></div>
+                </div>
+            </div>
+        </div>
+        <div class="card col-md-3 col-12 ml-2" style="border-top: 2px solid blue;">
+            <div class="card-content">
+                <div class="card-body">
+                    <h3 class="card-title"> Building </h3>
+                    <div class="card-subtitle">
+                        <p>Secure a building anywhere in Nigeria. All buildings on our platform are properly verified. </p>
+                    </div>
+                    <div class = "card-subtitle"><a href="{% url 'view_building' %}" class="btn btn-primary"><i class = "fa fa-sign-in"></i></a></div>
+                </div>
+            </div>
+        </div>
+        <div class="card col-md-3 col-12 ml-2" style="border-top: 2px solid blue;">
+            <div class="card-content">
+                <div class="card-body"> 
+                    <h3 class="card-title"> Hire Services </h3>
+                    <div class="card-subtitle">
+                        <p>Ever been stranded looking for a photographer, driver, home lesson teacher, graphic designer or any other service man? With Globage you have the best service men at your finger tips. </p>
+                    </div>
+                    <div class = "card-subtitle"><a href="{% url 'hire_services' %}" class="btn btn-primary"><i class = "fa fa-sign-in"></i></a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ft">
+        <hr>
+      
+    </div>
+</div>
+
+<div id="ad">
+    
+</div>
+  
+{% endblock %}

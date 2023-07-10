@@ -1,0 +1,65 @@
+{% extends 'accounts/base.html' %}
+
+{% block body %}
+
+{% if user.userverification.verification_status == 'Verified' %} 
+
+ <div>
+ <hr>
+     <h1 style = "color: rgb(0,0,200)">PROMO SUBSCRIPTION</h1>
+     {% if not user.userverification.is_payment_up_to_date %}
+      <!--MY POSTS-->
+              <div class="row gutters-sm">
+                <div class="col-sm-6 mb-3">
+                  <div class="card h-90">
+                    <div class="card-body">
+                      <h3 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">PROMO SUBSCRIPTION</i></h3>
+                      <div><a class="btn btn-primary">
+                       NO ACTIVE SUBSCRIPTION<span class="badge bg-danger ms-2">!</span> SUBSCRIBE TO CONTINUE!
+                      </a></div>
+                      <hr>
+                      <div><a class="btn btn-primary">
+                        #3500 / 6 MONTHS | #6000 / 1 YEAR
+                      </a></div>
+                      <hr>
+                      <!--<div class="progress mb-3" style="height: 5px">
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>-->
+                      <div><a class="btn btn-primary">
+                        BANK: ZENITH BANK<br> ACCOUNT NUMBER: 2209595392 <br>ACCOUNT NAME: EZUGWU EMMANUEL
+                      </a></div>
+                      <hr>
+                      <!--div class="progress mb-3" style="height: 5px">
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: 72%" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>-->
+                       {% endif %}
+                       {% if user.userverification.is_payment_up_to_date %}
+                      <div><a class="btn btn-primary">
+                        SUBSCRIPTION UP TO DATE!<span class="badge bg-danger ms-2">!</span>
+                      </a></div>
+                      {% endif %}
+                      <!--<div class="progress mb-3" style="height: 5px">
+                      <div class="progress-bar bg-primary" role="progressbar" style="width: 89%" aria-valuenow="89" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>-->
+                      <!--<small>Mobile Template</small>
+                      <div class="progress mb-3" style="height: 5px">
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: 55%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                      <small>Backend API</small>
+                      <div class="progress mb-3" style="height: 5px">
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: 66%" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>-->
+                    </div>
+                  </div>
+                </div>
+                <!--en-->
+
+          
+ </div>
+ 
+ 
+{% endif %}
+
+
+
+{% endblock %}
